@@ -158,7 +158,8 @@ const FinancesScreen = () => {
                 size={80}
               />
               <Text style={styles.modalText}>Payment Completed!</Text>
-              <Text style={styles.modalSubtext}>Your transaction was successful. In the next 24 hours, you'll be able to download a receipt for your records.</Text>
+              <Text style={styles.modalSubtext}>Your transaction was successful.</Text>
+              <Text style={styles.modalSubtext}> In the next 24 hours, you'll be able to download a receipt for your records.</Text>
             </View>
             ) : (
               <Text style={styles.modalText}>Payment Failed.</Text>
@@ -380,7 +381,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#24628F",
     paddingVertical: 15,
     borderRadius: 5,
-    marginBottom: 50
+    marginBottom: 40,
+    marginTop: 60
   },
   closeButtonText: {
     color: "white",
@@ -392,7 +394,7 @@ const styles = StyleSheet.create({
     color: "#5D6470",
     textAlign: 'center',
     lineHeight: 25,
-    marginBottom: 20
+    // marginBottom: 20
   }
 });
 

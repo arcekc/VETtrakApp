@@ -341,7 +341,7 @@ export default function AppNavigation({ navigation }) {
             headerLeft: () => (
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Icon
-                  name="arrowleft"
+                  name="closecircleo"
                   type="ant-design"
                   color="#000"
                   size={25}
