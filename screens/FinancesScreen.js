@@ -27,6 +27,12 @@ const FinancesScreen = () => {
     setShowModal(true);
   };
 
+  const isInstalment1Overdue = () => {
+    const today = new Date();
+    const dueDate = new Date("2023-07-31"); // Change this to the actual due date of Instalment 1
+    return dueDate < today;
+  };
+
   const toggleTab = (tab) => {
     setActiveTab(tab);
   };
@@ -90,14 +96,10 @@ const FinancesScreen = () => {
             </View>
             <Text style={styles.dueAmountText}>$575.00</Text>
             <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                style={[styles.button, styles.buttonSecondary]}
-              >
+              <TouchableOpacity style={[styles.button, styles.buttonSecondary]}>
                 <Text style={styles.buttonText}>Pay $575.00</Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.button, styles.buttonSecondary]}
-              >
+              <TouchableOpacity style={[styles.button, styles.buttonSecondary]}>
                 <Text style={styles.buttonText}>Pay other amount</Text>
               </TouchableOpacity>
             </View>
@@ -107,41 +109,99 @@ const FinancesScreen = () => {
             <Text style={styles.mainButtonText}>Make full payment</Text>
           </TouchableOpacity>
 
-          <View style={styles.transactionHistory}>
-            <Text style={styles.historyHeader}>Transactions</Text>
-            <View style={styles.transContainer}>
-            {transactionHistory.map((transaction, index) => (
-              <View key={index} style={styles.transactionItem}>
-                <View style={styles.iconContainer}>
-                  <Icon type="material-icon" name="receipt" size={20} />
-                </View>
-                <View style={styles.transactionInfo}>
-                  <Text style={styles.transactionFee}>{transaction.fee}</Text>
-                  <Text style={styles.transactionDate}>{transaction.date}</Text>
-                </View>
-                <Text style={styles.transactionAmount}>
-                  {transaction.amount}
-                </Text>
-              </View>
-            ))}
-            </View>
-          </View>
-          <View style={styles.seeAll}>
+          {/* <View style={styles.seeAll}>
           <TouchableOpacity>
             <Text style={styles.seeText}>See all</Text>
           </TouchableOpacity>
+          </View> */}
+
+          {/* Payment Schedule */}
+          <View style={styles.paymentSchedule}>
+            <Text style={styles.scheduleHeader}>Payment Plan Schedule</Text>
+            <View style={styles.scheduleTable}>
+              <View style={styles.scheduleRow}>
+                <Text style={styles.scheduleLabel}>Item</Text>
+                <Text style={styles.scheduleLabelDue}>Due Date</Text>
+                <Text style={styles.scheduleLabel}>Amount</Text>
+              </View>
+              <View style={styles.scheduleRow}>
+                <View style={styles.scheduleItemContainer}>
+                  <Icon type="evilicon" name="clock" color="red" size={20} style={styles.scheduleItemIcon} />
+                  <Text style={[styles.scheduleItem, styles.overdueText]}>Instalment 4</Text>
+                </View>
+                <Text style={[styles.scheduleDate, isInstalment1Overdue() && styles.overdueText]}>31 Jul</Text>
+                <Text style={[styles.scheduleAmount, styles.overdueText]}>$575.00</Text>
+              </View>
+              <View style={styles.scheduleRow}>
+                <View style={styles.scheduleItemContainer}>
+                  <Icon type="evilicon" name="clock" size={20} style={styles.scheduleItemIcon} />
+                  <Text style={styles.scheduleItem}>Instalment 5</Text>
+                </View>
+                <Text style={styles.scheduleDate}>15 Aug</Text>
+                <Text style={styles.scheduleAmount}>$575.00</Text>
+              </View>
+              <View style={styles.scheduleRow}>
+                <View style={styles.scheduleItemContainer}>
+                  <Icon type="evilicon" name="clock" size={20} style={styles.scheduleItemIcon} />
+                  <Text style={styles.scheduleItem}>Instalment 6</Text>
+                </View>
+                <Text style={styles.scheduleDate}>31 Aug</Text>
+                <Text style={styles.scheduleAmount}>$575.00</Text>
+              </View>
+              {/* Add more schedule rows as needed */}
+            </View>
           </View>
         </>
       )}
 
       {activeTab === "Payment Receipts" && (
         <>
-          <Text style={styles.noGradesText}>No payment receipts available</Text>
+          <View style={styles.transactionHistory}>
+            <Text style={styles.historyHeader}>JULY 2023</Text>
+            <View style={styles.transContainer}>
+              {transactionHistory.map((transaction, index) => (
+                <View key={index} style={styles.transactionItem}>
+                  <View style={styles.iconContainer}>
+                    <Icon type="material-icon" name="receipt" size={20} />
+                  </View>
+                  <View style={styles.transactionInfo}>
+                    <Text style={styles.transactionFee}>{transaction.fee}</Text>
+                    <Text style={styles.transactionDate}>
+                      {transaction.date}
+                    </Text>
+                  </View>
+                  <Text style={styles.transactionAmount}>
+                    {transaction.amount}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          </View>
+          <View style={styles.transactionHistory}>
+            <Text style={styles.historyHeader}>JUNE 2023</Text>
+            <View style={styles.transContainer}>
+              {transactionHistory.map((transaction, index) => (
+                <View key={index} style={styles.transactionItem}>
+                  <View style={styles.iconContainer}>
+                    <Icon type="material-icon" name="receipt" size={20} />
+                  </View>
+                  <View style={styles.transactionInfo}>
+                    <Text style={styles.transactionFee}>{transaction.fee}</Text>
+                    <Text style={styles.transactionDate}>
+                      {transaction.date}
+                    </Text>
+                  </View>
+                  <Text style={styles.transactionAmount}>
+                    {transaction.amount}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          </View>
         </>
       )}
 
-
-<Modal
+      <Modal
         animationType="slide"
         transparent={true}
         visible={showModal}
@@ -151,16 +211,22 @@ const FinancesScreen = () => {
           <View style={styles.modalContent}>
             {paymentCompleted ? (
               <View style={styles.modalIconContainer}>
-              <Icon
-                type="material-community"
-                name="check-circle"
-                color="#2ECC71"
-                size={80}
-              />
-              <Text style={styles.modalText}>Payment Completed!</Text>
-              <Text style={styles.modalSubtext}>Your transaction was successful.</Text>
-              <Text style={styles.modalSubtext}> In the next 24 hours, you'll be able to download a receipt for your records.</Text>
-            </View>
+                <Icon
+                  type="material-community"
+                  name="check-circle"
+                  color="#2ECC71"
+                  size={80}
+                />
+                <Text style={styles.modalText}>Payment Completed!</Text>
+                <Text style={styles.modalSubtext}>
+                  Your transaction was successful.
+                </Text>
+                <Text style={styles.modalSubtext}>
+                  {" "}
+                  In the next 24 hours, you'll be able to download a receipt for
+                  your records.
+                </Text>
+              </View>
             ) : (
               <Text style={styles.modalText}>Payment Failed.</Text>
             )}
@@ -233,7 +299,7 @@ const styles = StyleSheet.create({
     // marginBottom: 20,
   },
   balance: {
-    fontSize: 18,
+    fontSize: 17,
     marginBottom: 30,
   },
   mainButton: {
@@ -270,6 +336,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
     marginBottom: 10,
+    color: "#666",
   },
   transactionItem: {
     flexDirection: "row",
@@ -320,9 +387,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "top",
     marginBottom: 10,
-    borderBottomColor: '#DADADA',
+    borderBottomColor: "#DADADA",
     borderBottomWidth: 1,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   iconContainer: {
     justifyContent: "flex-start", // Align icon at the top
@@ -333,31 +400,31 @@ const styles = StyleSheet.create({
   },
   transactionFee: {
     fontWeight: "500",
-    fontSize: 15
+    fontSize: 15,
   },
   transactionDate: {
     color: "gray",
     fontSize: 12,
-    marginTop: 2
+    marginTop: 2,
   },
   transactionAmount: {
     flex: 1, // Take up 1/6 of the available space
     textAlign: "right",
     fontWeight: "500",
-    color: '#287631',
-    fontSize: 15
+    color: "#287631",
+    fontSize: 15,
   },
   transContainer: {
-    backgroundColor: '#F9F9FB',
+    backgroundColor: "#F9F9FB",
     padding: 20,
     borderRadius: 7,
-    marginBottom: 20
+    // marginBottom: 0,
   },
   seeText: {
-    color: '#24628F',
-    textDecorationLine: 'underline',
+    color: "#24628F",
+    textDecorationLine: "underline",
     marginBottom: 50,
-    fontSize: 16
+    fontSize: 16,
   },
   modalContainer: {
     flex: 1,
@@ -375,14 +442,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginBottom: 20,
     textAlign: "center",
-    marginTop: 20
+    marginTop: 20,
   },
   closeButton: {
     backgroundColor: "#24628F",
     paddingVertical: 15,
     borderRadius: 5,
     marginBottom: 40,
-    marginTop: 60
+    marginTop: 60,
   },
   closeButtonText: {
     color: "white",
@@ -392,10 +459,65 @@ const styles = StyleSheet.create({
   },
   modalSubtext: {
     color: "#5D6470",
-    textAlign: 'center',
+    textAlign: "center",
     lineHeight: 25,
     // marginBottom: 20
-  }
+  },
+  paymentSchedule: {
+    marginTop: 20,
+    borderTopWidth: 1,
+    borderTopColor: "#ECECEC",
+    paddingTop: 15,
+  },
+  scheduleHeader: {
+    fontSize: 18,
+    fontWeight: "600",
+    marginBottom: 10,
+    marginTop: 20
+  },
+  scheduleTable: {
+    marginTop: 10,
+    backgroundColor: "#F9F9FB",
+    padding: 20,
+    borderRadius: 7,
+    marginBottom: 30
+  },
+  scheduleRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: "#ECECEC",
+  },
+  scheduleDate: {
+    flex: 1,
+    textAlign: "right",
+  },
+  scheduleAmount: {
+    flex: 1,
+    textAlign: "right",
+  },
+  overdueText: {
+    color: "red",
+    // marginLeft: 5,
+    fontWeight: "600",
+  },
+  scheduleLabel: {
+    fontWeight: '600'
+  },
+  scheduleLabelDue: {
+    fontWeight: '600',
+    textAlign: 'right',
+    marginLeft: 70
+  },
+  scheduleItemContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  scheduleItemIcon: {
+    marginRight: 5,
+  },
+  
 });
 
 export default FinancesScreen;

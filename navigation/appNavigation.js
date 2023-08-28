@@ -168,6 +168,8 @@ function BottomTabs() {
               size={size}
             />
           ),
+          tabBarBadge: '!',
+          tabBarBadgeStyle: { backgroundColor: "#CC222F" },
           tabBarActiveTintColor: "black",
           headerTitleAlign: 'center',
         }}
