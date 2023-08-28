@@ -164,6 +164,9 @@ const styles = StyleSheet.create({
   },
   textValue: {
     fontSize: 16
+  },
+  padding: {
+    marginBottom: 50
   }
 });
 

@@ -126,15 +126,37 @@ const FinancesScreen = () => {
               </View>
               <View style={styles.scheduleRow}>
                 <View style={styles.scheduleItemContainer}>
-                  <Icon type="evilicon" name="clock" color="red" size={20} style={styles.scheduleItemIcon} />
-                  <Text style={[styles.scheduleItem, styles.overdueText]}>Instalment 4</Text>
+                  <Icon
+                    type="evilicon"
+                    name="clock"
+                    color="red"
+                    size={20}
+                    style={styles.scheduleItemIcon}
+                  />
+                  <Text style={[styles.scheduleItem, styles.overdueText]}>
+                    Instalment 4
+                  </Text>
                 </View>
-                <Text style={[styles.scheduleDate, isInstalment1Overdue() && styles.overdueText]}>31 Jul</Text>
-                <Text style={[styles.scheduleAmount, styles.overdueText]}>$575.00</Text>
+                <Text
+                  style={[
+                    styles.scheduleDate,
+                    isInstalment1Overdue() && styles.overdueText,
+                  ]}
+                >
+                  31 Jul
+                </Text>
+                <Text style={[styles.scheduleAmount, styles.overdueText]}>
+                  $575.00
+                </Text>
               </View>
               <View style={styles.scheduleRow}>
                 <View style={styles.scheduleItemContainer}>
-                  <Icon type="evilicon" name="clock" size={20} style={styles.scheduleItemIcon} />
+                  <Icon
+                    type="evilicon"
+                    name="clock"
+                    size={20}
+                    style={styles.scheduleItemIcon}
+                  />
                   <Text style={styles.scheduleItem}>Instalment 5</Text>
                 </View>
                 <Text style={styles.scheduleDate}>15 Aug</Text>
@@ -142,7 +164,12 @@ const FinancesScreen = () => {
               </View>
               <View style={styles.scheduleRow}>
                 <View style={styles.scheduleItemContainer}>
-                  <Icon type="evilicon" name="clock" size={20} style={styles.scheduleItemIcon} />
+                  <Icon
+                    type="evilicon"
+                    name="clock"
+                    size={20}
+                    style={styles.scheduleItemIcon}
+                  />
                   <Text style={styles.scheduleItem}>Instalment 6</Text>
                 </View>
                 <Text style={styles.scheduleDate}>31 Aug</Text>
@@ -156,46 +183,52 @@ const FinancesScreen = () => {
 
       {activeTab === "Payment Receipts" && (
         <>
-          <View style={styles.transactionHistory}>
-            <Text style={styles.historyHeader}>JULY 2023</Text>
-            <View style={styles.transContainer}>
-              {transactionHistory.map((transaction, index) => (
-                <View key={index} style={styles.transactionItem}>
-                  <View style={styles.iconContainer}>
-                    <Icon type="material-icon" name="receipt" size={20} />
-                  </View>
-                  <View style={styles.transactionInfo}>
-                    <Text style={styles.transactionFee}>{transaction.fee}</Text>
-                    <Text style={styles.transactionDate}>
-                      {transaction.date}
+          <View style={styles.padding}>
+            <View style={styles.transactionHistory}>
+              <Text style={styles.historyHeader}>JULY 2023</Text>
+              <View style={styles.transContainer}>
+                {transactionHistory.map((transaction, index) => (
+                  <View key={index} style={styles.transactionItem}>
+                    <View style={styles.iconContainer}>
+                      <Icon type="material-icon" name="receipt" size={20} />
+                    </View>
+                    <View style={styles.transactionInfo}>
+                      <Text style={styles.transactionFee}>
+                        {transaction.fee}
+                      </Text>
+                      <Text style={styles.transactionDate}>
+                        {transaction.date}
+                      </Text>
+                    </View>
+                    <Text style={styles.transactionAmount}>
+                      {transaction.amount}
                     </Text>
                   </View>
-                  <Text style={styles.transactionAmount}>
-                    {transaction.amount}
-                  </Text>
-                </View>
-              ))}
+                ))}
+              </View>
             </View>
-          </View>
-          <View style={styles.transactionHistory}>
-            <Text style={styles.historyHeader}>JUNE 2023</Text>
-            <View style={styles.transContainer}>
-              {transactionHistory.map((transaction, index) => (
-                <View key={index} style={styles.transactionItem}>
-                  <View style={styles.iconContainer}>
-                    <Icon type="material-icon" name="receipt" size={20} />
-                  </View>
-                  <View style={styles.transactionInfo}>
-                    <Text style={styles.transactionFee}>{transaction.fee}</Text>
-                    <Text style={styles.transactionDate}>
-                      {transaction.date}
+            <View style={styles.transactionHistory}>
+              <Text style={styles.historyHeader}>JUNE 2023</Text>
+              <View style={styles.transContainer}>
+                {transactionHistory.map((transaction, index) => (
+                  <View key={index} style={styles.transactionItem}>
+                    <View style={styles.iconContainer}>
+                      <Icon type="material-icon" name="receipt" size={20} />
+                    </View>
+                    <View style={styles.transactionInfo}>
+                      <Text style={styles.transactionFee}>
+                        {transaction.fee}
+                      </Text>
+                      <Text style={styles.transactionDate}>
+                        {transaction.date}
+                      </Text>
+                    </View>
+                    <Text style={styles.transactionAmount}>
+                      {transaction.amount}
                     </Text>
                   </View>
-                  <Text style={styles.transactionAmount}>
-                    {transaction.amount}
-                  </Text>
-                </View>
-              ))}
+                ))}
+              </View>
             </View>
           </View>
         </>
@@ -473,14 +506,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "600",
     marginBottom: 10,
-    marginTop: 20
+    marginTop: 20,
   },
   scheduleTable: {
     marginTop: 10,
     backgroundColor: "#F9F9FB",
     padding: 20,
     borderRadius: 7,
-    marginBottom: 30
+    marginBottom: 30,
   },
   scheduleRow: {
     flexDirection: "row",
@@ -503,12 +536,12 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   scheduleLabel: {
-    fontWeight: '600'
+    fontWeight: "600",
   },
   scheduleLabelDue: {
-    fontWeight: '600',
-    textAlign: 'right',
-    marginLeft: 70
+    fontWeight: "600",
+    textAlign: "right",
+    marginLeft: 70,
   },
   scheduleItemContainer: {
     flexDirection: "row",
@@ -517,7 +550,9 @@ const styles = StyleSheet.create({
   scheduleItemIcon: {
     marginRight: 5,
   },
-  
+  padding: {
+    marginBottom: 50
+  }
 });
 
 export default FinancesScreen;
