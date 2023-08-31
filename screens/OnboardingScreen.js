@@ -73,10 +73,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     lottie:{
-        flex: 0.7,
+        flex: 1,
         justifyContent: 'center',
         borderRadius: 500,
-        marginBottom: 150
+        marginBottom: 200
     },
     image: {
       

@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
   },
   weekCell: {
-    flex: 1,
+    flex: 2,
   },
   statusCell: {
     flex: 1,
